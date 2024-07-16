@@ -1,14 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import twaLogo from './assets/tapps.png'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import twaLogo from "./assets/tapps.png";
+import viteLogo from "/vite.svg";
+import "./App.css";
 
-import WebApp from '@twa-dev/sdk'
+import WebApp from "@twa-dev/sdk";
+
+const geTLocalTime = () => {
+  // Get the current date and time
+  const now = new Date();
+
+  // Format the time as needed
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const seconds = now.getSeconds();
+
+  // Format the date as needed
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1; // Months are zero-based
+  const day = now.getDate();
+
+  // Display the local time
+  const time = `Local Time: ${hours}:${minutes}:${seconds}`;
+  const date = `Local Date: ${month}/${day}/${year}`;
+
+  return `${date}, ${time}`;
+};
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <div>
@@ -22,20 +41,20 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>TWA + Vite + React</h1>
+      <h1>dev-kbpsystem</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-      {/*  */}
-      <div className="card">
-        <button onClick={() => WebApp.showAlert(`Hello World! Current count is ${count}`)}>
-            Show Alert
+        <button
+          onClick={() =>
+            WebApp.showAlert(
+              `Hello! the current time in your location is ${geTLocalTime()}`
+            )
+          }
+        >
+          Say hello!
         </button>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
